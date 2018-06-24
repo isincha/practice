@@ -6,6 +6,63 @@ const char *teens[] = { "ten", "eleven", "twelve", "thirteen", "fourteen", "fift
 "nineteen" };
 const char *tens[] = { "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
+//каждый if выводит название первого(в некоторых случаях первых двух) разрядо
+//и возвращает число без выведеных разрядов, в main цикл вызова функции продолжается
+//пока не выведены все разряды
+
+
+long nameForNumber(long number) {
+	//проверка на ноль
+	if (number == 0) {
+		printf("zero ");
+		return 0;
+	}
+	//выводит последний разряд
+	if (number < 10) {
+		printf("%s ", ones[number]);
+		return 0;
+	}
+	//выводит десятки от 10-20
+	if (number < 20) {
+		printf("%s ", teens[number - 10]);
+		return 0;
+	}
+	//если число 2 разрядное выводит колво десятков > 20
+	if (number < 100) {
+		printf("%s ", tens[number / 10]);
+		return number % 10;
+	}
+	//если число 3 разрядное выводит колво сотен
+	if (number < 1000) {
+		printf("%s hundred ", ones[number / 100]);
+		return number % 100;
+	}
+	//если число 4 разрядное выводит колво тысяч
+	if (number < 10000) {
+		printf("%s thousand ", ones[number / 1000]);
+		return number % 1000;
+	}
+	//если у числа первые два разряда из диапазона 10-20 выодит колво десятков тысяч
+	if (number < 20000) {
+		printf("%s thousand ", teens[number / 1000 - 10]);
+		return number % 1000;
+	}
+	//если число 5 разрядное выводит колво десятков тысяч > 20
+	if (number < 100000) {
+		printf("%s ", tens[number / 10000]);
+		return number % 10000;
+	}
+	//если число 6 разрядное выводит колво сотен тысяч
+	if (number < 1000000) {
+		printf("%s hundred ", ones[number / 100000]);
+		return number % 100000;
+	}
+	// если число 7 разрядное выводит колво миллионов
+	if (number < 10000000) {
+		printf("%s million ", ones[number / 1000000]);
+		return number % 1000000;
+	}
+}
 
 int main() {
 	long input;
